@@ -10,11 +10,11 @@ router.post('/', folderController.createFolder);
 // Get All Folders
 router.get('/', folderController.getFolders);
 
+// Search Folders (must be before /:id to avoid conflicts)
+router.get('/search', folderController.searchFolders);
+
 // Update Folder
 router.put('/:id', folderController.updateFolder);
-
-// Search Folders
-router.get('/search', folderController.searchFolders);
 
 // Delete Folder
 router.delete('/:id', folderController.deleteFolder);
