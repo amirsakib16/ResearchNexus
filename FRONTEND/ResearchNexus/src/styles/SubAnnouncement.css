@@ -1,0 +1,113 @@
+/* Container */
+.task-assignment-container {
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 34px 128px;
+    background-color: #F0F3FA;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(57, 88, 134, 0.15);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Heading */
+.task-assignment-container h2 {
+    text-align: center;
+    color: #395886;
+    margin-bottom: 22px;
+    font-weight: 600;
+}
+
+/* Form layout */
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Form groups */
+.form-group-XSLL {
+    display: flex;
+    flex-direction: column;
+}
+.form-group-XSL {
+    display: flex;
+    flex-direction: column;
+}
+/* Labels */
+.form-group-XSL label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #395886;
+}
+.form-group-XSLL label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #395886;
+}
+/* Inputs & Select */
+.form-group-XSL input,
+.form-group-XSL select {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #B1C9EF;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #395886;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group-XSLL input,
+.form-group-XSLL select {
+    padding: 90px 12px;
+    border-radius: 6px;
+    border: 1px solid #B1C9EF;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #395886;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus state */
+.form-group-XSL input:focus,
+.form-group-XSLL select:focus {
+    outline: none;
+    border-color: #395886;
+    box-shadow: 0 0 0 2px rgba(57, 88, 134, 0.15);
+}
+
+/* Submit button */
+.btn-primary {
+    margin-top: 10px;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #395886;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.15s ease;
+}
+
+/* Hover & active states */
+.btn-primary:hover {
+    background-color: #2f4a6f;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Success / error message */
+.message {
+    margin-top: 16px;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    background-color: #B1C9EF;
+    color: #395886;
+}

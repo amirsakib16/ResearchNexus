@@ -71,6 +71,14 @@ export const deleteFile = (id) => {
 export const assignTask = (taskData) => 
   api.post('/tasks/assign', taskData);
 
+// ============= SUB-ANNOUNCEMENT APIs =============
+
+export const createSubAnnouncement = (announcementData) =>
+  api.post('/subannouncement', announcementData);
+
+export const getSubAnnouncementsByGroup = (groupId, category) =>
+  api.get(`/subannouncement/group/${groupId}`, { params: { category } });
+
 export const getTasksByGroup = (groupId) => 
   api.get(`/tasks/group/${groupId}`);  // FIXED: Changed backticks to parentheses
 

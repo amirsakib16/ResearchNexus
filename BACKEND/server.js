@@ -34,6 +34,7 @@ const taskRoutes = require('./routes/taskRoute');
 const progressRoutes = require('./routes/progressRoute');
 const previewRoutes = require('./routes/previewRoute');
 const announcementRoutes = require('./routes/announcementRoutes');
+const subAnnouncementRoutes = require('./routes/subannouncementRoutes');
 // Use Routes
 app.use('/api/profile', profileRoutes);
 app.use('/api/favorites', favoriteRoutes);
@@ -52,6 +53,8 @@ app.use('/api/preview', previewRoutes);
 app.use("/api/maindashboard", maindashboardRoutes);
 app.use("/api/notepads", notePadRoutes);
 app.use('/api/announcements', announcementRoutes);
+
+app.use('/api/subannouncement', subAnnouncementRoutes);
 
 app.use("/api/routines", routineRoutes);
 

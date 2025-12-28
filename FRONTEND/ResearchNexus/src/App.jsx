@@ -8,6 +8,8 @@ import Profile from './components/Profile';
 import NotePad from './components/NotePad';
 import Routine from './components/Routine';
 import CreateAnnouncement from './components/CreateAnnouncement';
+import SubAnnouncement from './components/SubAnnouncement';
+import PlanCycle from './components/PlanCycle';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -102,7 +104,14 @@ function App() {
         path="/notepad"
         element={user ? <NotePad /> : <Navigate to="/login" replace />}
       />
-
+      <Route
+        path="/subannouncement"
+        element={user ? <SubAnnouncement /> : <Navigate to="/login" replace />}
+      />
+      <Route
+        path="/plan"
+        element={user ? <PlanCycle /> : <Navigate to="/login" replace />}
+      />
       {/* ✅ ROUTINE (NO PROPS, SAFE) */}
       <Route
         path="/routine"

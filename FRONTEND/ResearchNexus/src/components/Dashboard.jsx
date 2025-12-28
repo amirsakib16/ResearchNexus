@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SubAnnouncement from './SubAnnouncement';
+import PlanCycle from './PlanCycle';
 
 import {
   createFolder,
@@ -129,21 +131,21 @@ function Dashboard({ user, userType }) {
     }
   }, []);
 
-const toggleFavorite = async (fileId) => {
-  try {
-    await fetch('http://localhost:9222/api/favorites/toggle', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userEmail: user.Gmail, fileId }),
-    });
+  const toggleFavorite = async (fileId) => {
+    try {
+      await fetch('http://localhost:9222/api/favorites/toggle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userEmail: user.Gmail, fileId }),
+      });
 
-    setFavorites((prev) =>
-      prev.includes(fileId) ? prev.filter((id) => id !== fileId) : [...prev, fileId]
-    );
-  } catch (error) {
-    console.error('Error toggling favorite:', error);
-  }
-};
+      setFavorites((prev) =>
+        prev.includes(fileId) ? prev.filter((id) => id !== fileId) : [...prev, fileId]
+      );
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+    }
+  };
 
   const loadFolders = async () => {
     try {
@@ -213,9 +215,9 @@ const toggleFavorite = async (fileId) => {
     try {
       const folderResponse = await searchFolders(searchQuery, user.Gmail);
       const fileResponse = await searchFiles(searchQuery, user.Gmail);
-      
+
       setFolders(folderResponse.data);
-      
+
       if (fileResponse.data.length > 0) {
         setFiles(fileResponse.data);
         setSelectedFolder({ Name: 'Search Results', id: 'search' });
@@ -301,7 +303,7 @@ const toggleFavorite = async (fileId) => {
     setSelectedFolder(folder);
     loadFiles(folder.id);
   };
-const loadStudentTasks = async () => {
+  const loadStudentTasks = async () => {
     try {
       const response = await getTasksByGroup(user.Group_id);
       setTasks(response.data);
@@ -439,10 +441,10 @@ const loadStudentTasks = async () => {
         {userType === 'supervisor' ? (
           <>
             <button
-              onClick={() => navigate('/notepad')}
-              className="nav-tab"
+              onClick={() => setActiveTab('announcement')}
+              className={`nav-tab ${activeTab === 'announcement' ? 'active' : ''}`}
             >
-              📝 Notepad
+              🎤 Announcement
             </button>
             <button
               onClick={() => setActiveTab('tasks')}
@@ -472,6 +474,12 @@ const loadStudentTasks = async () => {
               📤 Submit Work
             </button>
             <button
+              onClick={() => setActiveTab('plan')}
+              className={`nav-tab ${activeTab === 'plan' ? 'active' : ''}`}
+            >
+              🧭 Plan Cycle
+            </button>
+            <button
               onClick={() => setActiveTab('feedback')}
               className={`nav-tab ${activeTab === 'feedback' ? 'active' : ''}`}
             >
@@ -488,6 +496,22 @@ const loadStudentTasks = async () => {
       {/* Main Content Area */}
       <div className="main-content">
         {/* FILES TAB */}
+        {/* STUDENT PLAN CYCLE TAB */}
+        {activeTab === 'plan' && userType === 'student' && (
+          <div className="task-section">
+            <h2>🧭 Plan Cycle</h2>
+            <PlanCycle groupId={user.Group_id} />
+          </div>
+        )}
+
+        {/* ANNOUNCEMENT TAB */}
+        {activeTab === 'announcement' && userType === 'supervisor' && (
+          <div className="form-section">
+            <h2>Publish Announcement</h2>
+            <SubAnnouncement professorEmail={user.Gmail} />
+          </div>
+        )}
+
         {activeTab === 'files' && (
           <>
             <div className="search-bar">
@@ -603,7 +627,7 @@ const loadStudentTasks = async () => {
         {activeTab === 'tasks' && userType === 'student' && (
           <div className="task-section">
             <h2>My Tasks</h2>
-            
+
             <div className="progress-container">
               <div className="progress-info">
                 <span className="progress-label">Weekly Progress</span>
@@ -720,10 +744,10 @@ const loadStudentTasks = async () => {
         {activeTab === 'submissions' && userType === 'supervisor' && (
           <div className="task-section">
             <h2>Student Work Submissions</h2>
-            <div style={{ 
-              background: '#fff3cd', 
-              padding: '15px', 
-              borderRadius: '8px', 
+            <div style={{
+              background: '#fff3cd',
+              padding: '15px',
+              borderRadius: '8px',
               marginBottom: '20px',
               border: '1px solid #ffc107'
             }}>
@@ -734,11 +758,11 @@ const loadStudentTasks = async () => {
               </small>
             </div>
             {works.length === 0 ? (
-              <div style={{ 
-                background: '#f8f9fa', 
-                padding: '30px', 
-                borderRadius: '8px', 
-                textAlign: 'center' 
+              <div style={{
+                background: '#f8f9fa',
+                padding: '30px',
+                borderRadius: '8px',
+                textAlign: 'center'
               }}>
                 <p className="no-submissions">No submissions yet</p>
                 <small style={{ color: '#6c757d' }}>
@@ -1007,8 +1031,8 @@ const loadStudentTasks = async () => {
       {/* File Preview Modal */}
       {showFilePreview && (
         <div className="modal-overlay" onClick={() => setShowFilePreview(false)}>
-          <div 
-            className="modal-content" 
+          <div
+            className="modal-content"
             style={{ maxWidth: '90%', maxHeight: '90vh', width: 'auto' }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -1021,12 +1045,12 @@ const loadStudentTasks = async () => {
                 ✕ Close
               </button>
             </div>
-            
+
             <div style={{ maxHeight: '70vh', overflow: 'auto', background: '#f8f9fa', padding: '10px', borderRadius: '6px' }}>
               {previewFileName.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i) ? (
-                <img 
-                  src={previewFileUrl} 
-                  alt="Preview" 
+                <img
+                  src={previewFileUrl}
+                  alt="Preview"
                   style={{ maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto' }}
                 />
               ) : previewFileName.match(/\.(pdf)$/i) ? (
@@ -1036,8 +1060,8 @@ const loadStudentTasks = async () => {
                   title="PDF Preview"
                 />
               ) : previewFileName.match(/\.(mp4|webm|ogg)$/i) ? (
-                <video 
-                  controls 
+                <video
+                  controls
                   style={{ maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto' }}
                 >
                   <source src={previewFileUrl} />
@@ -1057,7 +1081,7 @@ const loadStudentTasks = async () => {
                 </div>
               )}
             </div>
-            
+
             <div style={{ marginTop: '15px', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
               <button
                 onClick={() => handleDownloadPreviewFile(previewFileName)}
