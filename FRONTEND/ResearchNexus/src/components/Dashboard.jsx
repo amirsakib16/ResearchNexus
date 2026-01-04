@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import SubAnnouncement from './SubAnnouncement';
 import PlanCycle from './PlanCycle';
 import RecycleBinModal from './RecycleBinModal';
+import ViolanceControlPanel from './ViolanceControlPanel';
+
 import {
   createFolder,
   getFolders,
@@ -154,16 +156,16 @@ function Dashboard({ user, userType }) {
   };//
 
   //ML
-    // 3. ADD THIS REFRESH FUNCTION
+  // 3. ADD THIS REFRESH FUNCTION
   const handleRestoreFromBin = () => {
     // Reload the folder list
-    loadFolders(); 
-    
+    loadFolders();
+
     // If we are currently inside a folder, reload its files too
     if (selectedFolder) {
-        // Assuming you have a function to load files. 
-        // If not, you can copy the logic you use in `handleFolderClick`
-        loadFiles(selectedFolder.id); 
+      // Assuming you have a function to load files. 
+      // If not, you can copy the logic you use in `handleFolderClick`
+      loadFiles(selectedFolder.id);
     }
   };
 
@@ -266,12 +268,12 @@ function Dashboard({ user, userType }) {
 
   // Make sure axios is imported at the top: import axios from 'axios';
 
- const handleDeleteFolder = async (id) => {
+  const handleDeleteFolder = async (id) => {
     if (window.confirm('Move this folder to Recycle Bin?')) {
       try {
         // USE THE SERVICE FUNCTION
-        await moveFolderToTrash(id); 
-        
+        await moveFolderToTrash(id);
+
         loadFolders();
         setSelectedFolder(null);
         setFiles([]);
@@ -338,14 +340,14 @@ function Dashboard({ user, userType }) {
   //   }
   // };
 
-     const handleDeleteFile = async (id) => {
+  const handleDeleteFile = async (id) => {
     if (window.confirm('Move this file to Recycle Bin?')) {
       try {
         // USE THE SERVICE FUNCTION
         await moveFileToTrash(id);
 
         if (selectedFolder) {
-            loadFiles(selectedFolder.id);
+          loadFiles(selectedFolder.id);
         }
         loadFolders();
       } catch (error) {
@@ -464,7 +466,7 @@ function Dashboard({ user, userType }) {
     }
   };
 
-  
+
   const percentage = tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0;
 
   return (
@@ -501,6 +503,7 @@ function Dashboard({ user, userType }) {
             >
               🎤 Announcement
             </button>
+
             <button
               onClick={() => setActiveTab('tasks')}
               className={`nav-tab ${activeTab === 'tasks' ? 'active' : ''}`}
@@ -512,6 +515,12 @@ function Dashboard({ user, userType }) {
               className={`nav-tab ${activeTab === 'submissions' ? 'active' : ''}`}
             >
               📝 Review Submissions
+            </button>
+            <button
+              onClick={() => setActiveTab('students')}
+              className={`nav-tab ${activeTab === 'students' ? 'active' : ''}`}
+            >
+              🎓 Violance Control Panel
             </button>
           </>
         ) : (
@@ -558,6 +567,9 @@ function Dashboard({ user, userType }) {
             <PlanCycle groupId={user.Group_id} />
           </div>
         )}
+        {activeTab === 'students' && userType === 'supervisor' && (
+          <ViolanceControlPanel />
+        )}
 
         {/* ANNOUNCEMENT TAB */}
         {activeTab === 'announcement' && userType === 'supervisor' && (
@@ -589,12 +601,12 @@ function Dashboard({ user, userType }) {
                 </button>
               )}
 
-               <button 
-            className="btn btn-primary" // Or whatever class you have
-            onClick={() => setShowRecycleBin(true)}
-          >
-            Recycle Bin 🗑️
-          </button>
+              <button
+                className="btn btn-primary" // Or whatever class you have
+                onClick={() => setShowRecycleBin(true)}
+              >
+                Recycle Bin 🗑️
+              </button>
             </div>
 
             <div className="content-layout">
@@ -983,16 +995,16 @@ function Dashboard({ user, userType }) {
       )}
 
       //ML
-      <RecycleBinModal 
+      <RecycleBinModal
         isOpen={showRecycleBin}
         onClose={() => setShowRecycleBin(false)}
         user={user}
         onRestore={() => {
-           loadFolders(); 
-           if (selectedFolder) {
-             setFiles([]); // Or reload files
-             setSelectedFolder(null);
-           }
+          loadFolders();
+          if (selectedFolder) {
+            setFiles([]); // Or reload files
+            setSelectedFolder(null);
+          }
         }}
       />
 
@@ -1176,9 +1188,9 @@ function Dashboard({ user, userType }) {
         </div>
       )}
     </div>
-  
-  //ML
-  
+
+    //ML
+
   );
 }
 

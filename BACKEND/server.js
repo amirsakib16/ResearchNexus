@@ -23,6 +23,8 @@ connectDB();
 const profileRoutes = require('./routes/profileRoutes'); 
 const notePadRoutes = require("./routes/notePadRoutes");
 const favoriteRoutes = require('./routes/favoriteRoutes');
+const studentRoutes = require('./routes/studentRoutes');
+
 
 // shagupta
 const routineRoutes = require("./routes/routineRoutes");
@@ -52,8 +54,7 @@ app.use('/api/files', fileRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/preview', previewRoutes);
-
-
+app.use('/api/students', studentRoutes);
 
 app.use("/api/maindashboard", maindashboardRoutes);
 app.use("/api/notepads", notePadRoutes);
@@ -67,3 +68,6 @@ app.use("/api/sites", siteRoutes);
 app.use('/api/ai', aiRoutes);
 const PORT = process.env.PORT || 9222;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+

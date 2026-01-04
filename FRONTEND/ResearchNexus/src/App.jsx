@@ -12,7 +12,7 @@ import SubAnnouncement from './components/SubAnnouncement';
 import PlanCycle from './components/PlanCycle';
 import SitesPage from './components/SitesPage';
 import ResearchTool from './components/ResearchTool';
-
+import ViolanceControlPanel from './components/ViolanceControlPanel';
 function App() {
   const [user, setUser] = useState(null);
   const [userType, setUserType] = useState(null);
@@ -86,10 +86,10 @@ function App() {
         }
       />
 
-        <Route 
-  path="/tools" 
-  element={user ? <ResearchTool /> : <Navigate to="/login" />} 
-/>
+      <Route
+        path="/tools"
+        element={user ? <ResearchTool /> : <Navigate to="/login" />}
+      />
 
       <Route
         path="/files"
@@ -135,15 +135,23 @@ function App() {
 
 
 
+      <Route
+        path="/students"
+        element={user ? <ViolanceControlPanel /> : <Navigate to="/login" replace />}
+      />
+
+
+
+
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
-        <Route
+      <Route
         path="/sites"
         element={user ? <SitesPage user={user} /> : <Navigate to="/login" replace />}
       />
 
     </Routes>
-    
+
   );
 }
 

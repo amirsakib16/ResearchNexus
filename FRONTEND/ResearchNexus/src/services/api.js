@@ -15,6 +15,14 @@ export const login = (email, userType) => {
   return api.post('/auth/login', { email, userType });
 };
 
+// ===== STUDENT DASHBOARD APIs =====
+export const getAllStudents = () =>
+  api.get('/students');
+
+export const removeStudent = (id) =>
+  api.delete(`/students/${id}`);
+
+
 export const registerSupervisor = (data) => {
   return api.post('/auth/register/supervisor', data);
 };
