@@ -37,9 +37,6 @@ function App() {
       }
     }
 
-
-
-
     setLoaded(true);
   }, []);
 
@@ -77,8 +74,6 @@ function App() {
         element={!user ? <Register /> : <Navigate to="/maindashboard" replace />}
       />
 
-
-
       {/* Dashboards */}
       <Route
         path="/maindashboard"
@@ -89,6 +84,11 @@ function App() {
             <Navigate to="/login" replace />
           )
         }
+      />
+
+      <Route
+        path="/tools"
+        element={user ? <ResearchTool /> : <Navigate to="/login" />}
       />
 
       <Route
@@ -106,11 +106,6 @@ function App() {
         path="/profile"
         element={user ? <Profile user={user} userType={userType} /> : <Navigate to="/login" replace />}
       />
-
-
-
-
-
 
       <Route
         path="/notepad"
@@ -138,6 +133,16 @@ function App() {
         )}
       />
 
+
+
+      <Route
+        path="/students"
+        element={user ? <ViolanceControlPanel /> : <Navigate to="/login" replace />}
+      />
+
+
+
+
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
       <Route
@@ -149,8 +154,5 @@ function App() {
 
   );
 }
-
-
-
 
 export default App;

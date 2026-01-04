@@ -28,6 +28,3 @@ exports.toggleFavorite = async (req, res) => {
     res.status(500).json({ message: 'Error toggling favorite', error });
   }
 };
-
-
-
