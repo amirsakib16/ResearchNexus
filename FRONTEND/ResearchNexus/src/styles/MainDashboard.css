@@ -1,0 +1,172 @@
+/* MAIN CONTAINER */
+.dashboard-container {
+  width: 100vw;
+  background: #84a4da;
+  min-height: 100vh;
+  color: rgb(236, 238, 240);
+  font-family: "Georgia", serif;
+}
+
+/* TOP HEADER */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  background: #587596;
+  height: 170px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.left-section h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.left-section h2 {
+  font-size: 28px;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.left-section p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.brain-img {
+  width: 250px;
+  height: 250px;
+  margin-left: 120px;
+  margin-top: -50px;
+}
+
+/* NAVIGATION BAR */
+.dashboard-nav {
+  padding: 10px;
+  text-align: right;
+  margin-right: 40px;
+}
+
+.dashboard-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  justify-content: flex-end;
+  font-size: 14px;
+}
+
+/* NAV COLORS */
+.dashboard-nav ul li a,
+.dashboard-nav ul li button {
+  background: none;
+  border: none;
+  color: #1e90ff;
+  font-size: 14px;
+  font-family: "Georgia", serif;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+
+.dashboard-nav ul li a:hover,
+.dashboard-nav ul li button:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.dashboard-nav ul li button:focus {
+  outline: none;
+}
+
+/* ========================= */
+/* DEADLINE ALERT BAR (NEW) */
+/* ========================= */
+
+.deadline-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 25px 40px;
+  gap: 12px;
+}
+
+/* Bell icon */
+.bell-icon {
+  font-size: 20px;
+}
+
+/* Long notification bar */
+.announcement-list {
+  background: #1f3b64;              /* 🔵 CHANGE COLOR HERE */
+  border-radius: 30px;
+  padding: 10px 20px;
+  width: 520px;                     /* LONG BAR */
+  max-height: 60px;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+/* Each announcement */
+.announcement-item {
+  display: inline-block;
+  margin-right: 40px;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+/* Days left text */
+.announcement-item small {
+  color: #ffdd57;
+  font-weight: bold;
+}
+
+/* FEATURE SECTION */
+.feature-section {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 50px;
+}
+
+.feature-card {
+  width: 270px;
+  background: #a9b9d4;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  color: black;
+}
+
+.feature-card .icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.feature-card p {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* FOOTER */
+.dashboard-footer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 80px;
+  padding: 20px;
+  color: #893abe;
+  font-size: 14px;
+}
+
+.dashboard-footer p:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
